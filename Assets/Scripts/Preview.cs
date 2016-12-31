@@ -6,44 +6,43 @@ using System.IO;
 
 public class Preview : MonoBehaviour {
 
-    public Button button;
-    public GameObject target;
-    public Image image;
-    public Text text;
-    private Sprite mySprite;
+    public Button button; //get button which is selected
+    public GameObject target; //get object to work with
+    public Image image;       //get image placeholder
+    public Text text;         //get text placeholder
+    private Sprite mySprite;  //image takes sprites? for converting Texture2d to sprite
 
-    // Use this for initialization
     void Start () {
-        Button btn = button.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
+        Button btn = button.GetComponent<Button>(); //button action
+        btn.onClick.AddListener(TaskOnClick);       //button action
 
         int counter = 0;
-        Texture2D t2 = AssetPreview.GetAssetPreview(target);
+        Texture2D t2 = null;    //texture
         while (t2 == null && counter < 75)
         {
-            t2 = AssetPreview.GetAssetPreview(target);
-            counter++;
-            Thread.Sleep(15);
+            t2 = AssetPreview.GetAssetPreview(target);          //get that preview icon
+            counter++;                                          //it must w8
+            Thread.Sleep(15);                                   //it must w8
         }
-        mySprite = Sprite.Create(t2, new Rect(0, 0, 120, 120), new Vector2(120, 120));
-        image.sprite = mySprite;
+        mySprite = Sprite.Create(t2, new Rect(0, 0, 120, 120), new Vector2(120, 120)); //create sprite
+        image.sprite = mySprite;                                                       //assign sprite
 
-        text.text = target.name;
+        text.text = target.name;                                                       //object name 
     }
-    public void DeleteAll()
+    public void DeleteAll()//Alternative Refresh()
     {
-        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MyObjects"))
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag("MyObjects"))        
         {
             Destroy(o);
         }
     }
-    void TaskOnClick()
+    void TaskOnClick()//Button Action
     {
         DeleteAll();
         Debug.Log("You have clicked the button!");
 
-        var instantiatedPrefab = Instantiate(target, new Vector3(10,0,90), Quaternion.identity);
-        instantiatedPrefab.transform.localScale = new Vector3(15, 15, 15);
-        if (instantiatedPrefab != null) Debug.Log("Prefab created");
+        var instantiatedPrefab = Instantiate(target, new Vector3(10,0,90), Quaternion.identity); //create prefab on click
+        instantiatedPrefab.transform.localScale = new Vector3(15, 15, 15); //scale object
+        if (instantiatedPrefab != null) Debug.Log("Prefab created"); //just for fun :D 
     }
 }
