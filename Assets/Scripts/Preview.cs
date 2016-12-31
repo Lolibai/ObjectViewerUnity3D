@@ -41,8 +41,8 @@ public class Preview : MonoBehaviour {
         DeleteAll();
         Debug.Log("You have clicked the button!");
 
-        var instantiatedPrefab = Instantiate(target, new Vector3(10,0,90), Quaternion.identity); //create prefab on click
-        instantiatedPrefab.transform.localScale = new Vector3(15, 15, 15); //scale object
+        var instantiatedPrefab = Instantiate(target, new Vector3(30,0,90), Quaternion.identity); //create prefab on click
+        instantiatedPrefab.transform.localScale = new Vector3(20, 20, 20); //scale object
         if (instantiatedPrefab != null) Debug.Log("Prefab created"); //just for fun :D 
     }
 }
