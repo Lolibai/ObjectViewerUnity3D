@@ -1,7 +1,10 @@
 ﻿using UnityEngine.UI;
-using UnityEditor;
 using UnityEngine;
 using System.Threading;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Preview : MonoBehaviour {
 
@@ -17,12 +20,14 @@ public class Preview : MonoBehaviour {
 
         int counter = 0;
         Texture2D t2 = null;    //texture
+        #if UNITY_EDITOR
         while (t2 == null && counter < 75)
         {
             t2 = AssetPreview.GetAssetPreview(target);          //get that preview icon
             counter++;                                          //it must w8
             Thread.Sleep(15);                                   //it must w8
         }
+        #endif
         mySprite = Sprite.Create(t2, new Rect(0, 0, 120, 120), new Vector2(120, 120)); //create sprite
         image.sprite = mySprite;                                                       //assign sprite
 
