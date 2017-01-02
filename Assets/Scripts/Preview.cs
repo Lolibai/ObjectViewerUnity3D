@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEngine;
 using System.Threading;
-using System.IO;
 
 public class Preview : MonoBehaviour {
 
